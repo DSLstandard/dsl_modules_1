@@ -1,0 +1,8 @@
+// File with completely incorrect syntax
+
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!"; 
+    return 0;
+}
