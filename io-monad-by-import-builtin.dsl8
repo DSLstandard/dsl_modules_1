@@ -1,0 +1,39 @@
+import = |
+  builtin = '<builtin>'
+
+export inputs = do
+  builtin = inputs.builtin
+
+  rec
+    IO = |
+      new unwrap = |
+        unwrap
+
+      // fromPrimIO : PrimIO a -> IO a
+      // fromPrimIO : (World -> (World, a)) -> IO a
+      fromPrimIO primIO = |
+        unwrap = primIO
+
+      // toPrimIO : IO a -> PrimIO a
+      toPrimIO ma = ma.unwrap
+
+      // new : (a -> b) -> IO a -> IO b
+      map f ma = IO.bind ma (\a -> IO.pure (f a))
+
+      // pure : a -> IO a
+      pure a = IO.fromPrimIO \world f -> do
+        f world a
+
+      // ap : IO (a -> b) -> IO a -> IO b
+      ap iof ioa = do IO.bind
+        f < iof
+        a < ioa
+        IO.Applicative.pure (f a)
+
+      // bind : IO a -> (a -> IO b) -> IO b
+      bind ma a2mb = IO.new \world1 -> do
+        ma.unwrap world1 \world2 a -> (a2mb a).unwrap world2
+
+  IO
+
+{ import, export }
