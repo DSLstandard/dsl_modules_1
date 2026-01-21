@@ -1,0 +1,8 @@
+import = |
+  mod1 = './test_text.dsl8'
+
+export inputs = |
+  value1 = inputs.mod1
+  value2 = 'Text from dsl_modules_1/test_text_import.dsl8'
+
+{ import, export }
