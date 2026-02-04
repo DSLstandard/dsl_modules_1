@@ -1,0 +1,19 @@
+mod MyMod1:
+  def get_false():
+    false
+
+  def identity(<T: *>, value: T) -> T:
+    value
+
+  def noop():
+    return ()
+
+reexport MyMod1
+open MyMod1
+
+mod MyMod2:
+  def get_false_again():
+    get_false()
+
+reexport MyMod2
+open MyMod2
